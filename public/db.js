@@ -12,7 +12,7 @@ request.onsuccess = function (event) {
     console.log("There was an error" + event.target.errorCode + ".");
 };
 
-function saveTransaction(record) {
+function saveRecord(record) {
     const transaction = db.transaction(["budgetStore"], "readwrite");
     const storage = transaction.createObjectStore("budgetStore");
     storage.add(record);
