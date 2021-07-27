@@ -17,12 +17,6 @@ A budget tracker where you can keep track of increase and decrease in money, eve
 npm install, npm start
 ## Usage: 
 node server.js
-## License: 
-
-## Contribution: 
-
-## Testing: 
-
 
 ## Questions: 
 Any questions, comments, or concerns, please feel free to contact me at:
