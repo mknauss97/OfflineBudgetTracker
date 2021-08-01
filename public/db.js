@@ -8,22 +8,30 @@ request.onupgradeneeded = function (event) {
     });
 };
 
-request.onsuccess = function (event) {
+request.onsuccess = ({ target }) => {
+    db = target.result;
+
+    if (navigator.onLine) {
+        checkDB();
+    }
+}
+
+request.onerror = function (event) {
     console.log("There was an error" + event.target.errorCode + ".");
 };
 
 function saveRecord(record) {
     const transaction = db.transaction(["budgetStore"], "readwrite");
-    const storage = transaction.createObjectStore("budgetStore");
+    const storage = transaction.objectStore("budgetStore");
     storage.add(record);
 };
 
 function checkDB() {
     const transaction = db.transaction(["budgetStore"], "readwrite");
-    const storage = transaction.createObjectStore("budgetStore");
+    const storage = transaction.objectStore("budgetStore");
     const getAll = storage.getAll();
 
-    getAll.onsucces = () => {
+    getAll.onsuccess = () => {
         if (getAll.result.length > 0) {
             fetch("/api/transaction/bulk", {
                 method: "POST",
